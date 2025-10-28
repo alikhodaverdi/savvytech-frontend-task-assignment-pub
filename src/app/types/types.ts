@@ -1,4 +1,4 @@
-import { JSX } from "react";
+import React, { JSX } from "react";
 
 export type ProductType = {
   id: string;
@@ -17,5 +17,10 @@ export type SidebarItmeType = {
   id: string;
   label: string;
   icon?: JSX.Element;
-  path?: string;
+  path: string;
+};
+
+export type sidebBarProps = {
+  isMEnuOpen: boolean;
+  setisMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
