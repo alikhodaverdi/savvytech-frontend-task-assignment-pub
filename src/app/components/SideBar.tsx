@@ -1,7 +1,6 @@
 "use client";
 import { SidebarItmeType, sidebBarProps } from "../types/types";
 import Link from "next/link";
-import { useState } from "react";
 import { AiFillProduct } from "react-icons/ai";
 import { CiMenuBurger } from "react-icons/ci";
 

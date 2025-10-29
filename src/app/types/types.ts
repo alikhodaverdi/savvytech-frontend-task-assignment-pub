@@ -4,9 +4,8 @@ export type ProductType = {
   id: string;
   title: string;
   desc?: string;
-  img?: string;
   price: number;
-  date: Date;
+  date?: Date;
   options?: {
     title: string;
     additionalPrice: number;
@@ -20,7 +19,27 @@ export type SidebarItmeType = {
   path: string;
 };
 
+// sidebar modal types
 export type sidebBarProps = {
   isMEnuOpen: boolean;
   setisMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+// product modals types
+export type addProductModalType = {
+  addProductModalIsOpen: boolean;
+  setaddProductModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+export type editProductModalType = {
+  editProductModalIsOpen: boolean;
+  seteditProductModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type deleteProductModalType = {
+  deleteProductModalIsOpen: boolean;
+  setdeleteProductModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+export type detailProductModalType = {
+  detailProductModalIsOpen: boolean;
+  setdetailProductModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };

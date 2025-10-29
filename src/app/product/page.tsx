@@ -1,8 +1,13 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { products } from "../data/data";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import AddProductModal from "./add/page";
 
 const ProducsPage = () => {
+  // states for handels modals
+  const [addProductModalIsOpen, setaddProductModalIsOpen] = useState(false);
+
   const handleEdit = (id: number) => {
     console.log("Edit product:", id);
   };
@@ -13,7 +18,17 @@ const ProducsPage = () => {
 
   return (
     <div>
-      <h2 className="text-3xl font-bold">Products</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-3xl font-bold">Products</h2>
+        <div>
+          <button
+            onClick={() => setaddProductModalIsOpen((prev) => !prev)}
+            className="hover:cursor-pointer"
+          >
+            add product
+          </button>
+        </div>
+      </div>
       <hr />
 
       <div>
@@ -47,6 +62,13 @@ const ProducsPage = () => {
           </tbody>
         </table>
       </div>
+
+      {addProductModalIsOpen && (
+        <AddProductModal
+          addProductModalIsOpen={addProductModalIsOpen}
+          setaddProductModalIsOpen={setaddProductModalIsOpen}
+        />
+      )}
     </div>
   );
 };
