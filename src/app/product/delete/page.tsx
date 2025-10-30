@@ -12,7 +12,9 @@ const DeleteProductModal = ({
     e.preventDefault();
 
     try {
-      deleteProduct(id);
+      if (id) {
+        deleteProduct(id);
+      }
       setdeleteProductModalIsOpen(false);
     } catch (error) {
       console.log(error);
