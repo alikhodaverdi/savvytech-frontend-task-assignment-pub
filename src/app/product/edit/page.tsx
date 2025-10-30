@@ -25,7 +25,9 @@ const EditProductModal = ({
       date: new Date(),
     };
     try {
-      updateProduct(id, updatedData);
+      if (id) {
+        updateProduct(id, updatedData);
+      }
       seteditProductModalIsOpen(false);
     } catch (error) {
       console.log(error);
