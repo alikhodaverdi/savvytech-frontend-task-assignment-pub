@@ -20,19 +20,19 @@ export default function RootLayout({
   return (
     <html lang="fa">
       <body>
-        <div className="bg-gray-500 h-screen">
+        <div className="bg-[#F4F4F4] h-screen">
           <NavBar />
-          <div className="flex bg-amber-400 w-full h-[95%]">
+          <div className="flex bg-[#0C2B4E]-400 w-full h-[95%]">
             <aside
-              className={`bg-red-400 duration-200 transition-all ${
-                isMenuOpen ? "overflow-hidden w-[5%]" : "w-[10%]"
+              className={`bg-[#1D546C] duration-200 transition-all ${
+                isMenuOpen ? "overflow-hidden w-[3%]" : "w-[10%]"
               }`}
             >
               <SideBar isMEnuOpen={isMenuOpen} setisMenuOpen={setisMenuOpen} />
             </aside>
             <main
-              className={`bg-yellow-400   ${
-                isMenuOpen ? "overflow-hidden w-[95%] p-2" : "w-[90%] p-3"
+              className={`   ${
+                isMenuOpen ? "overflow-hidden w-[97%] p-2" : "w-[90%] p-3"
               }`}
             >
               {children}

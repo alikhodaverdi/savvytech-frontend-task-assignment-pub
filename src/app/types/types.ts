@@ -5,11 +5,7 @@ export type ProductType = {
   title: string;
   desc?: string;
   price: number;
-  date?: Date;
-  options?: {
-    title: string;
-    additionalPrice: number;
-  }[];
+  date: Date;
 };
 
 export type SidebarItmeType = {
@@ -33,13 +29,17 @@ export type addProductModalType = {
 export type editProductModalType = {
   editProductModalIsOpen: boolean;
   seteditProductModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  id: string | null;
+  product: ProductType | null;
 };
 
 export type deleteProductModalType = {
   deleteProductModalIsOpen: boolean;
   setdeleteProductModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  id: string | null;
 };
 export type detailProductModalType = {
   detailProductModalIsOpen: boolean;
   setdetailProductModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  product: ProductType | null;
 };

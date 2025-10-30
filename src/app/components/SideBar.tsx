@@ -3,13 +3,20 @@ import { SidebarItmeType, sidebBarProps } from "../types/types";
 import Link from "next/link";
 import { AiFillProduct } from "react-icons/ai";
 import { CiMenuBurger } from "react-icons/ci";
+import { FaWarehouse } from "react-icons/fa";
 
 const sideBarItems: SidebarItmeType[] = [
   {
     id: "1",
     label: "Products",
-    icon: undefined,
+    icon: <AiFillProduct />,
     path: "/product",
+  },
+  {
+    id: "2",
+    label: "Warehouse",
+    icon: <FaWarehouse />,
+    path: "/",
   },
 ];
 
@@ -19,7 +26,7 @@ const SideBar = ({ isMEnuOpen, setisMenuOpen }: sidebBarProps) => {
   };
   return (
     <ul className="gap-1 grid p-1 ">
-      <li className=" py-2  px-1 border-b flex justify-around items-center">
+      <li className=" py-2 text-[#F4F4F4]  px-1 border-b flex justify-around items-center">
         {!isMEnuOpen && (
           <Link href={"/"}>
             <div>Dashboard</div>
@@ -34,13 +41,16 @@ const SideBar = ({ isMEnuOpen, setisMenuOpen }: sidebBarProps) => {
       {sideBarItems.map((item, index) => (
         <li
           key={index}
-          className="bg-amber-200 hover:cursor-pointer py-2 rounded-md px-1 border "
+          className="hover:bg-[#F4F4F4] text-[#F4F4F4] hover:text-[#1A3D64] cursor-pointer py-2 rounded-md px-2 border hover:border-gray-300 transition-colors duration-200"
         >
-          <Link className="flex justify-around items-center" href={item.path}>
-            {!isMEnuOpen && <div>{item.label}</div>}
-            <div>
-              <AiFillProduct />
-            </div>
+          <Link
+            className={`flex ${
+              isMEnuOpen ? "justify-center" : "justify-between"
+            } justify-between items-center w-full`}
+            href={item.path}
+          >
+            {!isMEnuOpen && <span>{item.label}</span>}
+            <div>{item.icon}</div>
           </Link>
         </li>
       ))}

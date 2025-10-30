@@ -1,20 +1,22 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import { products } from "../data/data";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import AddProductModal from "./add/page";
+import DeleteProductModal from "./delete/page";
+import EditProductModal from "./edit/page";
+import { ProductType } from "../types/types";
+import DetailProductModal from "./[slug]/page";
 
 const ProducsPage = () => {
   // states for handels modals
+  const [product, setProduct] = useState<ProductType | null>(null);
   const [addProductModalIsOpen, setaddProductModalIsOpen] = useState(false);
-
-  const handleEdit = (id: number) => {
-    console.log("Edit product:", id);
-  };
-
-  const handleDelete = (id: number) => {
-    console.log("Delete product:", id);
-  };
+  const [deleteProductModalIsOpen, setdeleteProductModalIsOpen] =
+    useState(false);
+  const [editProductModalIsOpen, setEditProductModalIsOpen] = useState(false);
+  const [detailProductModalIsOpen, setdetailProductModalIsOpen] =
+    useState(false);
 
   return (
     <div>
@@ -23,38 +25,63 @@ const ProducsPage = () => {
         <div>
           <button
             onClick={() => setaddProductModalIsOpen((prev) => !prev)}
-            className="hover:cursor-pointer"
+            className="hover:cursor-pointer border px-2 rounded-md border-[#1D546C] bg-[#1D546C] hover:bg-[#F4F4F4] hover:text-[#1D546C] text-[#F4F4F4]"
           >
-            add product
+            Add Product
           </button>
         </div>
       </div>
       <hr />
 
-      <div>
-        <table className="w-full text-left border-collapse bg-white shadow-md">
-          <thead className="bg-gray-200">
+      <div className=" py-2">
+        <table className="w-full text-left bg-white shadow-lg rounded-lg overflow-hidden">
+          <thead className="bg-[#1D546C] text-[#F4F4F4]">
             <tr>
-              <th className="p-3">ID</th>
+              <th className="p-3">R</th>
               <th className="p-3">Title</th>
               <th className="p-3">Price</th>
+              <th className="p-3">Date</th>
               <th className="p-3">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
-              <tr key={product.id} className="border-b">
-                <td className="p-3">{product.id}</td>
+            {products.map((product, index) => (
+              <tr
+                key={product.id}
+                className="border-b hover:bg-gray-100 transition-colors"
+              >
+                <td className="p-3 font-medium">{index + 1}</td>
                 <td className="p-3">{product.title}</td>
                 <td className="p-3">${product.price}</td>
+                <td className="p-3">
+                  {product.date
+                    ? new Date(product.date)
+                        .toISOString()
+                        .replace("T", " ")
+                        .slice(0, 19)
+                    : "-"}
+                </td>
                 <td className="p-3 flex gap-3">
                   <FaEdit
-                    // onClick={() => handleEdit(product.id)}
-                    className="cursor-pointer hover:text-blue-600"
+                    onClick={() => {
+                      setProduct(product);
+                      setEditProductModalIsOpen(true);
+                    }}
+                    className="cursor-pointer text-[#1D546C] hover:text-blue-600 transition-colors"
                   />
                   <FaTrash
-                    // onClick={() => handleDelete(product.id)}
-                    className="cursor-pointer hover:text-red-600"
+                    onClick={() => {
+                      setProduct(product);
+                      setdeleteProductModalIsOpen(true);
+                    }}
+                    className="cursor-pointer text-[#1D546C] hover:text-red-600 transition-colors"
+                  />
+                  <FaEye
+                    onClick={() => {
+                      setProduct(product);
+                      setdetailProductModalIsOpen(true);
+                    }}
+                    className="cursor-pointer text-[#1D546C] hover:text-sky-600 transition-colors"
                   />
                 </td>
               </tr>
@@ -67,6 +94,29 @@ const ProducsPage = () => {
         <AddProductModal
           addProductModalIsOpen={addProductModalIsOpen}
           setaddProductModalIsOpen={setaddProductModalIsOpen}
+        />
+      )}
+      {deleteProductModalIsOpen && (
+        <DeleteProductModal
+          deleteProductModalIsOpen={deleteProductModalIsOpen}
+          setdeleteProductModalIsOpen={setdeleteProductModalIsOpen}
+          id={product?.id || null}
+        />
+      )}
+      {editProductModalIsOpen && (
+        <EditProductModal
+          editProductModalIsOpen={editProductModalIsOpen}
+          seteditProductModalIsOpen={setEditProductModalIsOpen}
+          id={product?.id || null}
+          product={product}
+        />
+      )}
+
+      {detailProductModalIsOpen && (
+        <DetailProductModal
+          detailProductModalIsOpen={detailProductModalIsOpen}
+          setdetailProductModalIsOpen={setdetailProductModalIsOpen}
+          product={product}
         />
       )}
     </div>
