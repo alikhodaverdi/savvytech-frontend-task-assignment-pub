@@ -13,7 +13,7 @@ export function getProductById(id: string): ProductType | undefined {
 
 // update product by id and return updated array
 export function updateProduct(
-  id: string | null,
+  id: string,
   updatedData: Partial<ProductType> // No needs all fields for
 ): void {
   const index = products.findIndex((p) => p.id === id);
@@ -23,7 +23,7 @@ export function updateProduct(
 }
 
 // Delete product by id and return updated array
-export function deleteProduct(id: string | null): void {
+export function deleteProduct(id: string): void {
   const index = products.findIndex((p) => p.id === id);
   if (index !== -1) {
     products.splice(index, 1);
